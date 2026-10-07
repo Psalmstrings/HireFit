@@ -84,15 +84,16 @@ const CVDetailPage = () => {
           </h1>
         </div>
 
-        <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
-          <Link to={`/cvs/${cv._id}/edit`} className="btn btn-secondary btn-sm">
+        <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap', width: '100%', maxWidth: 360 }}>
+          <Link to={`/cvs/${cv._id}/edit`} className="btn btn-secondary btn-sm" style={{ flex: '1 1 120px', minHeight: 38 }}>
             <Edit3 size={14} /> Edit Fields
           </Link>
-          <Link to={`/optimizer?cvId=${cv._id}`} className="btn btn-primary btn-sm">
+          <Link to={`/optimizer?cvId=${cv._id}`} className="btn btn-primary btn-sm" style={{ flex: '1 1 140px', minHeight: 38 }}>
             <Zap size={14} /> Tailor for Job
           </Link>
         </div>
       </div>
+
 
       {/* Tabs */}
       <div className="tabs no-print">

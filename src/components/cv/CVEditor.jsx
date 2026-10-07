@@ -93,15 +93,16 @@ const CVEditor = ({ initialData, onSave, isSaving = false }) => {
   return (
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
       {/* Top action bar */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--surface)', padding: 'var(--space-4)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
-        <div style={{ fontSize: 'var(--text-sm)', color: 'var(--muted)' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--surface)', padding: 'var(--space-4)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', flexWrap: 'wrap', gap: 'var(--space-3)' }}>
+        <div style={{ fontSize: 'var(--text-sm)', color: 'var(--muted)', flex: '1 1 200px' }}>
           Edit and refine extracted CV content. Changes will be saved as a new version.
         </div>
-        <button type="submit" className="btn btn-primary" disabled={isSaving}>
+        <button type="submit" className="btn btn-primary" style={{ minHeight: 42, minWidth: 150 }} disabled={isSaving}>
           {isSaving ? <div className="spinner" style={{ width: 14, height: 14 }} /> : <Save size={16} />}
           Save Changes
         </button>
       </div>
+
 
       {/* Personal Information */}
       <div className="card">
@@ -277,7 +278,7 @@ const CVEditor = ({ initialData, onSave, isSaving = false }) => {
             <div style={{ marginTop: 'var(--space-3)' }}>
               <label className="form-label mb-2" style={{ display: 'block' }}>Key Responsibilities & Achievements</label>
               {(exp.responsibilities || []).map((resp, rIdx) => (
-                <div key={rIdx} style={{ display: 'flex', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
+                <div key={rIdx} style={{ display: 'flex', gap: 'var(--space-2)', marginBottom: 'var(--space-2)', alignItems: 'center' }}>
                   <input
                     type="text"
                     className="form-input"
@@ -288,21 +289,25 @@ const CVEditor = ({ initialData, onSave, isSaving = false }) => {
                   <button
                     type="button"
                     className="btn btn-icon btn-ghost btn-sm"
+                    style={{ minWidth: 40, minHeight: 40, width: 40, height: 40, flexShrink: 0 }}
                     onClick={() => removeExperienceBullet(idx, 'responsibilities', rIdx)}
+                    aria-label="Remove bullet point"
                   >
-                    <Trash2 size={13} />
+                    <Trash2 size={15} />
                   </button>
                 </div>
               ))}
               <button
                 type="button"
                 className="btn btn-ghost btn-sm"
+                style={{ minHeight: 40, marginTop: 'var(--space-1)' }}
                 onClick={() => addExperienceBullet(idx, 'responsibilities')}
               >
-                <Plus size={13} /> Add Bullet Point
+                <Plus size={14} /> Add Bullet Point
               </button>
             </div>
           </div>
+
         ))}
       </div>
     </form>

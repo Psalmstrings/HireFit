@@ -119,15 +119,16 @@ const Dashboard = () => {
         </div>
 
         {/* Global Action buttons */}
-        <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
-          <Link to="/cvs/upload" className="btn btn-secondary">
+        <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap', width: '100%', maxWidth: 420 }}>
+          <Link to="/cvs/upload" className="btn btn-secondary" style={{ flex: '1 1 140px', minHeight: 42 }}>
             <PlusCircle size={16} /> Upload CV
           </Link>
-          <Link to="/optimizer" className="btn btn-primary">
+          <Link to="/optimizer" className="btn btn-primary" style={{ flex: '1 1 180px', minHeight: 42 }}>
             <Sparkles size={16} /> Optimize for a Job
           </Link>
         </div>
       </div>
+
 
       {/* Stats Cards */}
       <div className="stats-grid" style={{ marginBottom: 'var(--space-8)' }}>
@@ -185,8 +186,8 @@ const Dashboard = () => {
             </p>
           </div>
 
-          <div style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'center', flexWrap: 'wrap' }}>
-            <div style={{ position: 'relative', minWidth: 240 }}>
+          <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center', flexWrap: 'wrap', width: '100%', maxWidth: 440 }}>
+            <div style={{ position: 'relative', flex: '1 1 200px', minWidth: 160 }}>
               <Search size={15} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--muted)' }} />
               <input
                 type="text"
@@ -198,7 +199,7 @@ const Dashboard = () => {
               />
             </div>
 
-            <Link to="/cvs/upload" className="btn btn-primary btn-sm">
+            <Link to="/cvs/upload" className="btn btn-primary btn-sm" style={{ minHeight: 38, flex: '0 0 auto' }}>
               <PlusCircle size={15} /> Upload CV
             </Link>
           </div>
@@ -228,7 +229,7 @@ const Dashboard = () => {
         ) : (
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
             gap: 'var(--space-4)'
           }}>
             {filteredCvs.map(cv => (
@@ -242,6 +243,7 @@ const Dashboard = () => {
           </div>
         )}
       </div>
+
 
       {/* Recent Matches Section */}
       <div className="card">

@@ -219,9 +219,10 @@ const CVOptimizerPage = () => {
             ) : (
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 250px), 1fr))',
                 gap: 'var(--space-3)'
               }}>
+
                 {cvs.map(cv => {
                   const isSelected = cv._id === selectedCvId;
                   return (
@@ -405,6 +406,7 @@ const CVOptimizerPage = () => {
                 <button
                   type="button"
                   className="btn btn-primary btn-lg"
+                  style={{ minHeight: 46, width: '100%', maxWidth: 280 }}
                   onClick={handleOptimize}
                   disabled={!selectedCvId || !jobDescription.trim()}
                 >
@@ -412,6 +414,7 @@ const CVOptimizerPage = () => {
                 </button>
               </div>
             )}
+
           </div>
         </div>
       ) : (
@@ -432,16 +435,17 @@ const CVOptimizerPage = () => {
                 </p>
               </div>
 
-              <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
-                <button type="button" className="btn btn-secondary btn-sm" onClick={handleReset}>
-                  <RotateCcw size={14} /> Optimize Another Job
+              <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap', width: '100%', maxWidth: 440 }}>
+                <button type="button" className="btn btn-secondary btn-sm" style={{ flex: '1 1 140px', minHeight: 38 }} onClick={handleReset}>
+                  <RotateCcw size={14} /> Optimize Another
                 </button>
-                <Link to={`/cvs/${selectedCvId}`} className="btn btn-primary btn-sm">
-                  <Eye size={14} /> View & Export Tailored CV
+                <Link to={`/cvs/${selectedCvId}`} className="btn btn-primary btn-sm" style={{ flex: '1 1 180px', minHeight: 38 }}>
+                  <Eye size={14} /> View & Export CV
                 </Link>
               </div>
             </div>
           </div>
+
 
           {/* DEDICATED PRESERVED VS IMPROVED SECTION */}
           <div className="card" style={{ padding: 'var(--space-6)' }}>
@@ -522,8 +526,9 @@ const CVOptimizerPage = () => {
                 </div>
               </div>
 
-              <div className="card" style={{ gridColumn: 'span 2', padding: 'var(--space-6)' }}>
+              <div className="card grid-span-2" style={{ padding: 'var(--space-6)' }}>
                 <h3 style={{ fontSize: 'var(--text-md)', fontWeight: 700, color: 'var(--text)', marginBottom: 'var(--space-3)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+
                   <Lightbulb size={18} color="var(--primary)" />
                   AI Optimization Summary
                 </h3>
@@ -604,25 +609,26 @@ const CVOptimizerPage = () => {
               </p>
             </div>
 
-            <div style={{ display: 'flex', background: 'var(--surface-2)', padding: 3, borderRadius: 'var(--radius)' }}>
+            <div style={{ display: 'flex', background: 'var(--surface-2)', padding: 3, borderRadius: 'var(--radius)', flexWrap: 'wrap', width: '100%', maxWidth: 460 }}>
               <button
                 type="button"
                 className={`btn btn-sm ${viewMode === 'diffs' ? 'btn-primary' : 'btn-ghost'}`}
-                style={{ padding: '6px 14px' }}
+                style={{ padding: '6px 12px', flex: '1 1 auto', minHeight: 38 }}
                 onClick={() => setViewMode('diffs')}
               >
-                <Layers size={14} /> Proposed Diffs ({changes.length})
+                <Layers size={14} /> Diffs ({changes.length})
               </button>
               <button
                 type="button"
                 className={`btn btn-sm ${viewMode === 'sideBySide' ? 'btn-primary' : 'btn-ghost'}`}
-                style={{ padding: '6px 14px' }}
+                style={{ padding: '6px 12px', flex: '1 1 auto', minHeight: 38 }}
                 onClick={() => setViewMode('sideBySide')}
               >
-                <Columns size={14} /> Master vs Tailored Comparison
+                <Columns size={14} /> Master vs Tailored
               </button>
             </div>
           </div>
+
 
           {/* View Mode 1: Proposed Improvements Diffs */}
           {viewMode === 'diffs' && (
@@ -803,11 +809,11 @@ const CVOptimizerPage = () => {
           )}
 
           {/* Bottom Export Action */}
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-3)', marginTop: 'var(--space-4)' }}>
-            <button type="button" className="btn btn-secondary" onClick={handleReset}>
-              <RotateCcw size={15} /> Tailor for Another Position
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-2)', marginTop: 'var(--space-4)', flexWrap: 'wrap' }}>
+            <button type="button" className="btn btn-secondary" style={{ flex: '1 1 180px', minHeight: 44 }} onClick={handleReset}>
+              <RotateCcw size={15} /> Tailor Another Position
             </button>
-            <Link to={`/cvs/${selectedCvId}`} className="btn btn-primary btn-lg">
+            <Link to={`/cvs/${selectedCvId}`} className="btn btn-primary btn-lg" style={{ flex: '1 1 240px', minHeight: 44 }}>
               <Eye size={16} /> View & Export Tailored CV <ArrowRight size={16} />
             </Link>
           </div>
@@ -816,5 +822,6 @@ const CVOptimizerPage = () => {
     </div>
   );
 };
+
 
 export default CVOptimizerPage;

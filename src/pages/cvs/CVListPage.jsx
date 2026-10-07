@@ -89,11 +89,11 @@ const CVListPage = () => {
           </p>
         </div>
 
-        <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
-          <Link to="/optimizer" className="btn btn-secondary">
+        <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap', width: '100%', maxWidth: 420 }}>
+          <Link to="/optimizer" className="btn btn-secondary" style={{ flex: '1 1 150px', minHeight: 40 }}>
             <Sparkles size={16} /> Optimize for a Job
           </Link>
-          <Link to="/cvs/upload" className="btn btn-primary">
+          <Link to="/cvs/upload" className="btn btn-primary" style={{ flex: '1 1 150px', minHeight: 40 }}>
             <Plus size={16} /> Upload New CV
           </Link>
         </div>
@@ -101,13 +101,13 @@ const CVListPage = () => {
 
       {/* Search and Filters Bar */}
       {cvs.length > 0 && (
-        <div style={{ display: 'flex', gap: 'var(--space-3)', marginBottom: 'var(--space-6)' }}>
-          <div style={{ position: 'relative', flex: 1, maxWidth: 400 }}>
+        <div style={{ display: 'flex', gap: 'var(--space-2)', marginBottom: 'var(--space-6)', flexWrap: 'wrap' }}>
+          <div style={{ position: 'relative', flex: '1 1 240px', minWidth: 200, maxWidth: 440 }}>
             <Search size={16} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--muted)' }} />
             <input
               type="text"
               className="form-input"
-              style={{ paddingLeft: 36 }}
+              style={{ paddingLeft: 36, height: 42 }}
               placeholder="Search by CV title, target role, or filename..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
@@ -117,6 +117,7 @@ const CVListPage = () => {
             <button
               type="button"
               className="btn btn-ghost btn-sm"
+              style={{ minHeight: 42 }}
               onClick={() => setSearchQuery('')}
             >
               Clear
@@ -136,7 +137,7 @@ const CVListPage = () => {
             <p style={{ maxWidth: 480, margin: '8px auto 20px' }}>
               Upload your CVs once (e.g. Backend Developer CV, Frontend Developer CV, Full Stack Developer CV). They will remain saved in your library so you can optimize any of them for any job opening.
             </p>
-            <Link to="/cvs/upload" className="btn btn-primary btn-lg">
+            <Link to="/cvs/upload" className="btn btn-primary btn-lg" style={{ minHeight: 44 }}>
               <Plus size={18} /> Upload Your First CV
             </Link>
           </div>
@@ -153,8 +154,8 @@ const CVListPage = () => {
       ) : (
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-          gap: 'var(--space-5)'
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
+          gap: 'var(--space-4)'
         }}>
           {filteredCvs.map(cv => (
             <CVLibraryCard
@@ -166,6 +167,7 @@ const CVListPage = () => {
           ))}
         </div>
       )}
+
     </div>
   );
 };

@@ -51,10 +51,11 @@ const CVPreview = ({ data, template = 'modern', fileName = 'CV_HireFit' }) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-      <div className="no-print" style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-2)' }}>
+      <div className="no-print cv-preview-actions" style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
         <button
           type="button"
           className="btn btn-secondary btn-sm"
+          style={{ minHeight: 38, flex: '1 1 auto' }}
           onClick={handlePrint}
         >
           <Printer size={14} /> Print
@@ -62,6 +63,7 @@ const CVPreview = ({ data, template = 'modern', fileName = 'CV_HireFit' }) => {
         <button
           type="button"
           className="btn btn-primary btn-sm"
+          style={{ minHeight: 38, flex: '2 1 auto' }}
           onClick={handleDownloadPDF}
           disabled={downloading}
         >
@@ -82,6 +84,7 @@ const CVPreview = ({ data, template = 'modern', fileName = 'CV_HireFit' }) => {
         {renderTemplate()}
       </div>
     </div>
+
   );
 };
 

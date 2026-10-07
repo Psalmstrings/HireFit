@@ -99,6 +99,7 @@ const ApplicationTrackerPage = () => {
         <button
           type="button"
           className="btn btn-primary"
+          style={{ minHeight: 42 }}
           onClick={() => { setEditingApp(null); setModalOpen(true); }}
         >
           <Plus size={16} /> Track New Application
@@ -125,10 +126,10 @@ const ApplicationTrackerPage = () => {
             <div
               key={app._id}
               className="card card-hover"
-              style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-4)' }}
+              style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-3)' }}
             >
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+              <div style={{ flex: '1 1 240px', minWidth: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
                   <h3 style={{ fontSize: 'var(--text-md)', fontWeight: 700, color: 'var(--text)', margin: 0 }}>
                     {app.jobTitle}
                   </h3>
@@ -137,7 +138,7 @@ const ApplicationTrackerPage = () => {
                   </span>
                 </div>
 
-                <div style={{ display: 'flex', gap: 'var(--space-4)', fontSize: 'var(--text-xs)', color: 'var(--muted)', marginTop: 6, flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: 'var(--space-3)', fontSize: 'var(--text-xs)', color: 'var(--muted)', marginTop: 6, flexWrap: 'wrap' }}>
                   <span style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>
                     {app.company}
                   </span>
@@ -162,37 +163,41 @@ const ApplicationTrackerPage = () => {
                 )}
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', flexShrink: 0 }}>
                 {app.jobUrl && (
                   <a
                     href={app.jobUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-icon btn-ghost btn-sm"
+                    style={{ minWidth: 40, minHeight: 40, width: 40, height: 40 }}
                     title="Open job link"
                   >
-                    <ExternalLink size={15} />
+                    <ExternalLink size={16} />
                   </a>
                 )}
                 <button
                   type="button"
                   className="btn btn-icon btn-ghost btn-sm"
+                  style={{ minWidth: 40, minHeight: 40, width: 40, height: 40 }}
                   onClick={() => { setEditingApp(app); setModalOpen(true); }}
                   aria-label="Edit application"
                 >
-                  <Edit2 size={15} />
+                  <Edit2 size={16} />
                 </button>
                 <button
                   type="button"
                   className="btn btn-icon btn-ghost btn-sm text-danger"
+                  style={{ minWidth: 40, minHeight: 40, width: 40, height: 40 }}
                   onClick={() => handleDelete(app._id, `${app.jobTitle} at ${app.company}`)}
                   aria-label="Delete application"
                 >
-                  <Trash2 size={15} />
+                  <Trash2 size={16} />
                 </button>
               </div>
             </div>
           ))}
+
         </div>
       ) : (
         <div className="card">
