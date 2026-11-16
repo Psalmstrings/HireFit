@@ -1,7 +1,20 @@
 import axios from 'axios';
 
+// Detect if running on localhost / 127.0.0.1
+const isLocalhost = typeof window !== 'undefined' && 
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+// When developing locally, connect directly to local backend port 5000;
+// In production (Vercel), connect to the production Render API.
+const getApiBaseUrl = () => {
+  if (isLocalhost) {
+    return import.meta.env.VITE_LOCAL_API_URL || 'http://localhost:5000/api';
+  }
+  return import.meta.env.VITE_API_URL || 'https://hirefit-server.onrender.com/api';
+};
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://hirefit-server.onrender.com/api' || 'http://localhost:5000/api',
+  baseURL: getApiBaseUrl(),
   headers: { 'Content-Type': 'application/json' },
   timeout: 60000 // 60s for AI calls
 });

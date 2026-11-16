@@ -3,37 +3,55 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import Navbar from '../../components/layout/Navbar';
-import { LogIn, ArrowRight } from 'lucide-react';
+import api from '../../services/api';
+import { LogIn, Mail } from 'lucide-react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [resending, setResending] = useState(false);
+  const [unverifiedEmail, setUnverifiedEmail] = useState(null);
   const { login } = useAuth();
-  const { success, error: toastError } = useToast();
+  const { success, error: toastError, info } = useToast();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setUnverifiedEmail(null);
     try {
-      await login(email, password);
+      const data = await login(email, password);
       success('Welcome back to HireFit!');
+      if (data?.user?.isVerified === false) {
+        info('Notice: Your email address is not verified yet. Please check your inbox.');
+      }
       navigate('/dashboard');
     } catch (err) {
-      toastError(err.response?.data?.message || 'Login failed. Please check your credentials.');
+      const msg = err.response?.data?.message || 'Login failed. Please check your credentials.';
+      toastError(msg);
+      if (err.response?.data?.code === 'UNVERIFIED_EMAIL') {
+        setUnverifiedEmail(email);
+      }
     } finally {
       setLoading(false);
     }
   };
 
-  const handleFillDemo = (type) => {
-    if (type === 'demo') {
-      setEmail('demo@hirefit.dev');
-      setPassword('DemoPass123!');
-    } else {
-      setEmail('admin@hirefit.dev');
-      setPassword('AdminPass123!');
+  const handleResendVerification = async () => {
+    const targetEmail = unverifiedEmail || email;
+    if (!targetEmail) {
+      toastError('Please enter your email address to receive verification link.');
+      return;
+    }
+    setResending(true);
+    try {
+      const { data } = await api.post('/auth/resend-verification', { email: targetEmail });
+      success(data.message || 'Verification link sent! Check your inbox.');
+    } catch (err) {
+      toastError(err.response?.data?.message || 'Failed to resend verification link.');
+    } finally {
+      setResending(false);
     }
   };
 
@@ -61,6 +79,7 @@ const Login = () => {
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 placeholder="name@example.com"
+                autoComplete="email"
               />
             </div>
 
@@ -78,6 +97,7 @@ const Login = () => {
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 placeholder="••••••••"
+                autoComplete="current-password"
               />
             </div>
 
@@ -87,18 +107,19 @@ const Login = () => {
             </button>
           </form>
 
-          {/* Quick Demo Logins */}
-          <div style={{ marginTop: 'var(--space-6)', padding: 'var(--space-3)', background: 'var(--surface-2)', borderRadius: 'var(--radius)', fontSize: 'var(--text-xs)', textAlign: 'center' }}>
-            <span style={{ color: 'var(--muted)', display: 'block', marginBottom: 6 }}>Quick Fill Seed Accounts:</span>
-            <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
-              <button type="button" className="btn btn-secondary btn-sm" onClick={() => handleFillDemo('demo')}>
-                Demo User
-              </button>
-              <button type="button" className="btn btn-secondary btn-sm" onClick={() => handleFillDemo('admin')}>
-                Admin User
+          {unverifiedEmail && (
+            <div style={{ marginTop: 'var(--space-4)', padding: 'var(--space-3)', background: 'var(--warning-light)', borderRadius: 'var(--radius)', fontSize: 'var(--text-xs)', textAlign: 'center' }}>
+              <p style={{ margin: '0 0 6px 0', color: '#92400E', fontWeight: 600 }}>Account unverified. Need a new activation link?</p>
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm"
+                onClick={handleResendVerification}
+                disabled={resending}
+              >
+                <Mail size={14} /> {resending ? 'Sending...' : 'Resend Verification Email'}
               </button>
             </div>
-          </div>
+          )}
 
           <div style={{ textAlign: 'center', marginTop: 'var(--space-6)', fontSize: 'var(--text-sm)', color: 'var(--muted)' }}>
             Don't have an account?{' '}

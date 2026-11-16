@@ -54,7 +54,8 @@ const Navbar = ({ isMobileNavOpen = false, onToggleMobileNav }) => {
           )}
 
           <Link to={user ? '/dashboard' : '/'} className="navbar-brand" aria-label="HireFit Home">
-            Hire<span className="brand-accent">Fit</span>
+            <img src="/logo.png" alt="HireFit Logo" className="navbar-brand-logo" />
+            <span className="navbar-brand-text">Hire<span className="brand-accent">Fit</span></span>
           </Link>
         </div>
 

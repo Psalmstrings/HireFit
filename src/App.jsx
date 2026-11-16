@@ -5,6 +5,7 @@ import { useAuth } from './context/AuthContext';
 import LandingPage from './pages/LandingPage';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
+import VerifyEmail from './pages/auth/VerifyEmail';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
 
@@ -65,6 +66,7 @@ const App = () => {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/verify-email" element={<VerifyEmail />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
 

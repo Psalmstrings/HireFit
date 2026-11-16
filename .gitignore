@@ -1,2 +1,8 @@
+node_modules/
+dist/
+dist-ssr/
+*.local
 .env
-node_modules
+.env.*
+!.env.example
+.DS_Store

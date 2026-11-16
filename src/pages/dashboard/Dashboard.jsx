@@ -6,12 +6,13 @@ import { useToast } from '../../context/ToastContext';
 import CVLibraryCard from '../../components/cv/CVLibraryCard';
 import {
   FileText, Briefcase, Target, ArrowRight, PlusCircle, Search,
-  Zap, FolderHeart, Sparkles, Filter
+  Zap, FolderHeart, Sparkles, Filter, Mail
 } from 'lucide-react';
 
 const Dashboard = () => {
   const { user } = useAuth();
   const { success, error: toastError } = useToast();
+  const [resendingVerification, setResendingVerification] = useState(false);
   const [stats, setStats] = useState({
     cvCount: 0,
     jobCount: 0,
@@ -87,6 +88,19 @@ const Dashboard = () => {
     }
   };
 
+  const handleResendVerification = async () => {
+    if (!user?.email) return;
+    setResendingVerification(true);
+    try {
+      const { data } = await api.post('/auth/resend-verification', { email: user.email });
+      success(data.message || 'Verification email sent! Check your inbox.');
+    } catch (err) {
+      toastError(err.response?.data?.message || 'Failed to resend verification email.');
+    } finally {
+      setResendingVerification(false);
+    }
+  };
+
   const filteredCvs = cvs.filter(cv => {
     if (!searchQuery.trim()) return true;
     const query = searchQuery.toLowerCase();
@@ -128,6 +142,40 @@ const Dashboard = () => {
           </Link>
         </div>
       </div>
+
+      {/* Email Verification Alert Banner */}
+      {user && !user.isVerified && (
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: 12,
+          padding: '12px 16px',
+          background: '#FEF3C7',
+          border: '1px solid #FCD34D',
+          borderRadius: 'var(--radius)',
+          marginBottom: 'var(--space-6)',
+          color: '#92400E',
+          fontSize: 'var(--text-sm)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <Mail size={18} color="#D97706" />
+            <span>
+              <strong>Verify your email:</strong> Please check <strong>{user.email}</strong> to activate full features.
+            </span>
+          </div>
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            style={{ borderColor: '#F59E0B', color: '#92400E' }}
+            onClick={handleResendVerification}
+            disabled={resendingVerification}
+          >
+            {resendingVerification ? 'Sending...' : 'Resend Verification Email'}
+          </button>
+        </div>
+      )}
 
 
       {/* Stats Cards */}

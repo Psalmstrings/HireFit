@@ -69,7 +69,8 @@ const Sidebar = ({ isOpen = false, onClose }) => {
         <div className="sidebar-mobile-header hide-desktop">
           <div className="drawer-header-brand">
             <Link to="/dashboard" onClick={handleLinkClick} className="navbar-brand">
-              Hire<span className="brand-accent">Fit</span>
+              <img src="/logo.png" alt="HireFit Logo" className="navbar-brand-logo" />
+              <span className="navbar-brand-text">Hire<span className="brand-accent">Fit</span></span>
             </Link>
           </div>
           <button
