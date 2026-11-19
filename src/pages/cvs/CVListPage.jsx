@@ -74,7 +74,7 @@ const CVListPage = () => {
   }
 
   return (
-    <div style={{ maxWidth: 1100 }}>
+    <div style={{ maxWidth: 1100, width: '100%' }}>
       {/* Header */}
       <div className="section-header" style={{ marginBottom: 'var(--space-6)' }}>
         <div>
@@ -154,7 +154,7 @@ const CVListPage = () => {
       ) : (
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 260px), 1fr))',
           gap: 'var(--space-4)'
         }}>
           {filteredCvs.map(cv => (

@@ -53,7 +53,7 @@ const CVEditorPage = () => {
   if (!cv) return null;
 
   return (
-    <div style={{ maxWidth: 960 }}>
+    <div style={{ maxWidth: 960, width: '100%' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-6)', flexWrap: 'wrap', gap: 'var(--space-3)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
           <Link to={`/cvs/${id}`} className="btn btn-ghost btn-sm">

@@ -70,7 +70,7 @@ const LandingPage = () => {
       <Navbar />
 
       {/* 1. HERO SECTION */}
-      <section className="hero-ambient-bg" style={{ padding: '80px 24px 70px', textAlign: 'center' }}>
+      <section className="hero-ambient-bg landing-hero-section" style={{ textAlign: 'center' }}>
         <div style={{ maxWidth: 940, margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
           {/* Announcement pill */}
@@ -123,7 +123,7 @@ const LandingPage = () => {
                 <div className="mockup-dot mockup-dot-yellow" />
                 <div className="mockup-dot mockup-dot-green" />
               </div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#94A3B8' }}>
+              <div className="mockup-title" style={{ fontSize: 12, fontWeight: 600, color: '#94A3B8' }}>
                 HireFit Live Workspace — Senior React Developer vs. Acme Corp
               </div>
               <div className="mockup-tabs-bar">
@@ -155,7 +155,7 @@ const LandingPage = () => {
             <div className="mockup-body-container">
               {activeTab === 'match' && (
                 <div>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: 20 }}>
                     {/* Score Card */}
                     <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 12, border: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', gap: 20 }}>
                       <div style={{
@@ -277,7 +277,7 @@ const LandingPage = () => {
 
               {activeTab === 'gaps' && (
                 <div>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: 16 }}>
                     <div style={{ background: '#FFFFFF', padding: 18, borderRadius: 10, border: '1px solid #E2E8F0' }}>
                       <div style={{ fontSize: 12, fontWeight: 800, color: '#059669', marginBottom: 10, display: 'flex', alignItems: 'center', gap: 6 }}>
                         <CheckCircle2 size={16} /> Fully Evidenced Strengths (8/8)
@@ -323,7 +323,7 @@ const LandingPage = () => {
       </section>
 
       {/* 3. INTERACTIVE MINI DEMO SANDBOX */}
-      <section id="interactive-demo" style={{ padding: '80px 24px', background: '#F8FAFC' }}>
+      <section id="interactive-demo" className="landing-section" style={{ background: '#F8FAFC' }}>
         <div style={{ maxWidth: 1060, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 40 }}>
             <span style={{ fontSize: 12, fontWeight: 800, color: '#2878F0', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
@@ -360,7 +360,7 @@ const LandingPage = () => {
           </div>
 
           {/* Active Demo Box */}
-          <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 16, padding: '32px', boxShadow: 'var(--shadow-md)' }}>
+          <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 16, padding: 'clamp(16px, 4vw, 32px)', boxShadow: 'var(--shadow-md)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 20, paddingBottom: 16, borderBottom: '1px solid #F1F5F9' }}>
               <div>
                 <span style={{ fontSize: 12, fontWeight: 700, color: '#2878F0' }}>Target Opportunity:</span>
@@ -381,7 +381,7 @@ const LandingPage = () => {
               </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))', gap: 20 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: 20 }}>
               <div style={{ background: '#FFF5F5', padding: 20, borderRadius: 12, border: '1px solid #FECACA' }}>
                 <span style={{ fontSize: 11, fontWeight: 800, color: '#DC2626', textTransform: 'uppercase' }}>
                   ❌ Original Weak Formulation
@@ -422,8 +422,8 @@ const LandingPage = () => {
       </section>
 
       {/* 4. THE 4 CORE PILLARS (Detailed Features) */}
-      <section style={{ padding: '90px 24px', maxWidth: 1140, margin: '0 auto', width: '100%' }}>
-        <div style={{ textAlign: 'center', marginBottom: 60 }}>
+      <section className="landing-section" style={{ maxWidth: 1140, margin: '0 auto', width: '100%' }}>
+        <div style={{ textAlign: 'center', marginBottom: 48 }}>
           <span style={{ fontSize: 12, fontWeight: 800, color: '#2878F0', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Built for Serious Career Moves
           </span>
@@ -435,7 +435,7 @@ const LandingPage = () => {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 24 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: 24 }}>
           {/* Card 1 */}
           <div className="feature-card-interactive">
             <div className="feature-card-icon" style={{ background: '#EBF2FE', color: '#2878F0' }}>
@@ -491,9 +491,9 @@ const LandingPage = () => {
       </section>
 
       {/* 5. COMPARISON MATRIX (HireFit vs ChatGPT vs Canva) */}
-      <section style={{ padding: '80px 24px', background: '#F8FAFC' }}>
+      <section className="landing-section" style={{ background: '#F8FAFC' }}>
         <div style={{ maxWidth: 1040, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 44 }}>
+          <div style={{ textAlign: 'center', marginBottom: 36 }}>
             <span style={{ fontSize: 12, fontWeight: 800, color: '#2878F0', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               Direct Comparison
             </span>
@@ -580,8 +580,8 @@ const LandingPage = () => {
       </section>
 
       {/* 6. CANDIDATE TESTIMONIALS */}
-      <section style={{ padding: '80px 24px', maxWidth: 1140, margin: '0 auto', width: '100%' }}>
-        <div style={{ textAlign: 'center', marginBottom: 50 }}>
+      <section className="landing-section" style={{ maxWidth: 1140, margin: '0 auto', width: '100%' }}>
+        <div style={{ textAlign: 'center', marginBottom: 44 }}>
           <span style={{ fontSize: 12, fontWeight: 800, color: '#2878F0', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Proven Results
           </span>
@@ -590,7 +590,7 @@ const LandingPage = () => {
           </h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 24 }}>
           {/* Review 1 */}
           <div className="testimonial-card-rich">
             <div>
@@ -663,9 +663,9 @@ const LandingPage = () => {
       </section>
 
       {/* 7. FREQUENTLY ASKED QUESTIONS */}
-      <section style={{ padding: '80px 24px', background: '#F8FAFC' }}>
+      <section className="landing-section" style={{ background: '#F8FAFC' }}>
         <div style={{ maxWidth: 840, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 44 }}>
+          <div style={{ textAlign: 'center', marginBottom: 40 }}>
             <span style={{ fontSize: 12, fontWeight: 800, color: '#2878F0', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               Got Questions?
             </span>
@@ -704,8 +704,7 @@ const LandingPage = () => {
       </section>
 
       {/* 8. HIGH-CONVERSION CTA FOOTER SECTION */}
-      <section style={{
-        padding: '90px 24px',
+      <section className="landing-cta-section" style={{
         background: 'linear-gradient(135deg, #101C35 0%, #0A1222 100%)',
         color: '#FFFFFF',
         textAlign: 'center',
@@ -783,7 +782,7 @@ const LandingPage = () => {
       </section>
 
       {/* 9. BRAND FOOTER */}
-      <footer style={{ background: '#0A1222', color: '#94A3B8', padding: '48px 24px', fontSize: 13, borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}>
+      <footer className="landing-footer" style={{ background: '#0A1222', color: '#94A3B8', fontSize: 13, borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}>
         <div style={{ maxWidth: 1140, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 20 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <img src="/logo.png" alt="HireFit Logo" style={{ width: 36, height: 36, borderRadius: 6, objectFit: 'cover' }} />

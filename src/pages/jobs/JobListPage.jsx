@@ -46,7 +46,7 @@ const JobListPage = () => {
   }
 
   return (
-    <div style={{ maxWidth: 1100 }}>
+    <div style={{ maxWidth: 1100, width: '100%' }}>
       <div className="section-header">
         <div>
           <h1 style={{ fontSize: 'var(--text-2xl)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.02em' }}>

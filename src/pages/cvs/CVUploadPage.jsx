@@ -79,7 +79,7 @@ const CVUploadPage = () => {
   };
 
   return (
-    <div style={{ maxWidth: 960 }}>
+    <div style={{ maxWidth: 960, width: '100%' }}>
       {/* Header */}
       <div style={{ marginBottom: 'var(--space-6)' }}>
         <h1 style={{ fontSize: 'var(--text-2xl)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.02em' }}>

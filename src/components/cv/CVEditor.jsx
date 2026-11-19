@@ -91,13 +91,13 @@ const CVEditor = ({ initialData, onSave, isSaving = false }) => {
   const { personalInfo = {}, skills = {} } = data;
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', width: '100%' }}>
       {/* Top action bar */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--surface)', padding: 'var(--space-4)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', flexWrap: 'wrap', gap: 'var(--space-3)' }}>
         <div style={{ fontSize: 'var(--text-sm)', color: 'var(--muted)', flex: '1 1 200px' }}>
           Edit and refine extracted CV content. Changes will be saved as a new version.
         </div>
-        <button type="submit" className="btn btn-primary" style={{ minHeight: 42, minWidth: 150 }} disabled={isSaving}>
+        <button type="submit" className="btn btn-primary" style={{ minHeight: 42, flex: '1 1 auto', maxWidth: 220 }} disabled={isSaving}>
           {isSaving ? <div className="spinner" style={{ width: 14, height: 14 }} /> : <Save size={16} />}
           Save Changes
         </button>
@@ -278,10 +278,11 @@ const CVEditor = ({ initialData, onSave, isSaving = false }) => {
             <div style={{ marginTop: 'var(--space-3)' }}>
               <label className="form-label mb-2" style={{ display: 'block' }}>Key Responsibilities & Achievements</label>
               {(exp.responsibilities || []).map((resp, rIdx) => (
-                <div key={rIdx} style={{ display: 'flex', gap: 'var(--space-2)', marginBottom: 'var(--space-2)', alignItems: 'center' }}>
+                <div key={rIdx} style={{ display: 'flex', gap: 'var(--space-2)', marginBottom: 'var(--space-2)', alignItems: 'center', width: '100%' }}>
                   <input
                     type="text"
                     className="form-input"
+                    style={{ minWidth: 0, flex: 1 }}
                     value={resp}
                     onChange={e => updateExperienceBullet(idx, 'responsibilities', rIdx, e.target.value)}
                     placeholder="Describe genuine responsibility or project outcome..."

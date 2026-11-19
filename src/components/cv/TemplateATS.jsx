@@ -57,7 +57,11 @@ const TemplateATS = ({ data }) => {
           </div>
         )}
         <div className="cv-contact-row">
-          {contactPieces.join(' | ')}
+          {contactPieces.map((piece, i) => (
+            <span key={i} className="cv-contact-item">
+              {piece}{i < contactPieces.length - 1 ? ' | ' : ''}
+            </span>
+          ))}
         </div>
       </div>
 

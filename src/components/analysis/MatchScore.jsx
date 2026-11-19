@@ -99,7 +99,7 @@ const MatchScore = ({ analysis }) => {
 
   return (
     <div className="card fade-in">
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-8)', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-6)', flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-3)' }}>
           <ScoreGauge score={overallScore} size={160} />
           <div style={{ textAlign: 'center' }}>
@@ -115,7 +115,7 @@ const MatchScore = ({ analysis }) => {
           </div>
         </div>
 
-        <div style={{ flex: 1, minWidth: 260 }}>
+        <div style={{ flex: '1 1 240px', minWidth: 0, width: '100%' }}>
           <h3 style={{ fontSize: 'var(--text-md)', fontWeight: 700, marginBottom: 'var(--space-4)', color: 'var(--text)' }}>
             Category Breakdown
           </h3>

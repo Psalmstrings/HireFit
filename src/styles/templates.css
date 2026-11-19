@@ -23,6 +23,13 @@
   position: relative;
   font-size: 13.5px;
   line-height: 1.55;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.cv-contact-item {
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 /* ----------------------------------------------------
@@ -287,6 +294,8 @@
     border-radius: var(--radius-lg);
     background: #CBD5E1;
     -webkit-overflow-scrolling: touch;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .cv-sheet {
@@ -294,22 +303,43 @@
     font-size: 12.5px;
     min-height: auto;
     border-radius: var(--radius);
+    max-width: 100%;
+    width: 100%;
   }
 
   .template-modern .cv-name,
+  .template-minimal .cv-name,
   .template-ats .cv-name,
   .template-executive .cv-name {
     font-size: 22px;
   }
 
   .template-modern .cv-header,
+  .template-minimal .cv-header,
   .template-ats .cv-header,
   .template-executive .cv-header {
     margin-bottom: 16px;
     padding-bottom: 14px;
   }
 
+  .template-modern .cv-contact-row,
+  .template-minimal .cv-contact-row,
+  .template-ats .cv-contact-row,
+  .template-executive .cv-contact-row {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .template-modern .cv-contact-item,
+  .template-minimal .cv-contact-item,
+  .template-ats .cv-contact-item,
+  .template-executive .cv-contact-item {
+    word-break: break-all;
+  }
+
   .template-modern .cv-item-header,
+  .template-minimal .cv-item-header,
   .template-ats .cv-item-header,
   .template-executive .cv-item-header {
     flex-direction: column;
@@ -318,11 +348,36 @@
   }
 
   .template-modern .cv-item-sub,
+  .template-minimal .cv-item-sub,
   .template-ats .cv-item-sub,
   .template-executive .cv-item-sub {
     flex-direction: column;
     align-items: flex-start;
     gap: 2px;
+  }
+
+  .template-modern .cv-bullet-list,
+  .template-minimal .cv-bullet-list,
+  .template-executive .cv-bullet-list {
+    padding-left: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cv-document-container {
+    padding: 4px;
+  }
+
+  .cv-sheet {
+    padding: 16px 10px;
+    font-size: 11.5px;
+  }
+
+  .template-modern .cv-name,
+  .template-minimal .cv-name,
+  .template-ats .cv-name,
+  .template-executive .cv-name {
+    font-size: 18px;
   }
 }
 

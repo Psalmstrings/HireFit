@@ -44,11 +44,11 @@ const TemplateExecutive = ({ data }) => {
           <div className="cv-title-tag">{titleToDisplay}</div>
         )}
         <div className="cv-contact-row">
-          {personalInfo.email && <span>{personalInfo.email}</span>}
-          {personalInfo.phone && <span>• {personalInfo.phone}</span>}
-          {personalInfo.location && <span>• {personalInfo.location}</span>}
-          {personalInfo.linkedin && <span>• {personalInfo.linkedin}</span>}
-          {personalInfo.github && <span>• {personalInfo.github}</span>}
+          {personalInfo.email && <span className="cv-contact-item">{personalInfo.email}</span>}
+          {personalInfo.phone && <span className="cv-contact-item">• {personalInfo.phone}</span>}
+          {personalInfo.location && <span className="cv-contact-item">• {personalInfo.location}</span>}
+          {personalInfo.linkedin && <span className="cv-contact-item">• {personalInfo.linkedin}</span>}
+          {personalInfo.github && <span className="cv-contact-item">• {personalInfo.github}</span>}
         </div>
       </div>
 

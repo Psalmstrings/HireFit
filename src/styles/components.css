@@ -1261,14 +1261,27 @@ tr:hover td { background: var(--surface-2); }
   /* Section Header on Mobile */
   .section-header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: var(--space-3);
+  }
+
+  .section-header > div:last-child {
+    width: 100%;
+    max-width: 100% !important;
   }
 
   /* Stats Grid on Mobile */
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-3);
+  }
+
+  .stat-card {
+    padding: var(--space-4) var(--space-3);
+  }
+
+  .stat-card-value {
+    font-size: clamp(1.4rem, 5vw, 1.9rem);
   }
 
   /* Optimization Diff Cards on Mobile */
@@ -1289,7 +1302,33 @@ tr:hover td { background: var(--surface-2); }
 
   .change-actions .btn {
     flex: 1 1 calc(50% - var(--space-1));
-    min-height: 40px;
+    min-height: 42px;
+  }
+
+  /* Score Bar on Mobile - prevent label overflow */
+  .score-bar-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    margin-bottom: var(--space-3);
+  }
+
+  .score-bar-label {
+    min-width: 0;
+    width: 100%;
+    font-size: var(--text-xs);
+    font-weight: 600;
+  }
+
+  .score-bar-track {
+    width: 100%;
+    flex: none;
+    height: 7px;
+  }
+
+  .score-bar-value {
+    font-size: var(--text-xs);
+    text-align: right;
   }
 
   /* Modal Bottom Sheet */
@@ -1348,6 +1387,7 @@ tr:hover td { background: var(--surface-2); }
     scrollbar-width: none;
     flex-wrap: nowrap;
     padding-bottom: 2px;
+    width: 100%;
   }
 
   .tabs::-webkit-scrollbar {
@@ -1367,18 +1407,166 @@ tr:hover td { background: var(--surface-2); }
 @media (max-width: 480px) {
   .stats-grid {
     grid-template-columns: 1fr;
+    gap: var(--space-2);
   }
 
   .change-actions .btn {
     flex: 1 1 100%;
+    min-height: 44px;
   }
 
   .navbar {
     padding: 0 var(--space-3);
+    height: 58px;
   }
 
   .navbar-brand {
-    font-size: var(--text-lg);
+    font-size: 1rem;
+    gap: 6px;
+  }
+
+  .navbar-brand-logo {
+    height: 28px;
+    width: 28px;
+  }
+
+  .navbar-actions {
+    gap: var(--space-2);
+  }
+
+  .navbar-actions .btn-sm {
+    height: 34px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .navbar-avatar-btn {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  .navbar-user-dropdown {
+    right: 0;
+    max-width: calc(100vw - 20px);
+    min-width: 200px;
+  }
+
+  /* CV Library Cards on small mobile */
+  .cv-library-card {
+    padding: var(--space-4) var(--space-3);
+  }
+
+  .cv-library-card .btn {
+    min-height: 40px;
+  }
+
+  /* Empty state padding */
+  .empty-state {
+    padding: var(--space-8) var(--space-2);
+  }
+
+  /* Hero Section elements on <= 480px */
+  .hero-mockup-frame {
+    margin-top: var(--space-6);
+    border-radius: 12px;
+  }
+
+  .mockup-header-bar {
+    padding: 10px 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .mockup-title {
+    display: none !important;
+  }
+
+  .mockup-tabs-bar {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: auto;
+    max-width: 100%;
+    flex-wrap: nowrap;
+  }
+
+  .mockup-tab-pill {
+    padding: 4px 8px;
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+
+  .mockup-body-container {
+    padding: 14px 10px;
+  }
+
+  .ats-trusted-strip {
+    padding: 28px 12px;
+  }
+
+  .ats-badge-grid {
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .ats-badge-item {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+
+  .feature-card-interactive {
+    padding: 18px 14px;
+  }
+
+  .testimonial-card-rich {
+    padding: 18px 14px;
+  }
+
+  .faq-header-trigger {
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+
+  .faq-answer-body {
+    padding: 0 16px 14px;
+    font-size: 13px;
+  }
+}
+
+/* ========================================================
+   ULTRA-COMPACT MOBILE (<= 360px, e.g. Galaxy Fold, iPhone SE)
+   ======================================================== */
+@media (max-width: 360px) {
+  .navbar {
+    padding: 0 var(--space-2);
+    height: 54px;
+  }
+
+  .navbar-brand-text {
+    font-size: 0.95rem;
+  }
+
+  .navbar-actions {
+    gap: 4px;
+  }
+
+  .navbar-actions .btn-sm {
+    height: 32px;
+    padding: 0 8px;
+    font-size: 11px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    padding: var(--space-3) var(--space-2);
+  }
+
+  .card {
+    padding: var(--space-3) var(--space-2);
   }
 }
 
@@ -1539,6 +1727,50 @@ tr:hover td { background: var(--surface-2); }
     #FFFFFF;
   position: relative;
   overflow: hidden;
+}
+
+/* Landing Section Responsive Utility Classes */
+.landing-hero-section {
+  padding: 80px 24px 70px;
+}
+.landing-section {
+  padding: 80px 24px;
+}
+.landing-cta-section {
+  padding: 90px 24px;
+}
+.landing-footer {
+  padding: 48px 24px;
+}
+
+@media (max-width: 768px) {
+  .landing-hero-section {
+    padding: 48px 16px 40px;
+  }
+  .landing-section {
+    padding: 48px 16px;
+  }
+  .landing-cta-section {
+    padding: 56px 16px;
+  }
+  .landing-footer {
+    padding: 36px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-hero-section {
+    padding: 36px 12px 30px;
+  }
+  .landing-section {
+    padding: 36px 12px;
+  }
+  .landing-cta-section {
+    padding: 44px 12px;
+  }
+  .landing-footer {
+    padding: 28px 12px;
+  }
 }
 
 .hero-ambient-bg::before {
@@ -1758,7 +1990,9 @@ tr:hover td { background: var(--surface-2); }
   border: 1px solid #E2E8F0;
   border-radius: 16px;
   box-shadow: var(--shadow-md);
-  overflow: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
 }
 .comparison-header-row {
   display: grid;
@@ -1799,7 +2033,8 @@ tr:hover td { background: var(--surface-2); }
 @media (max-width: 768px) {
   .comparison-header-row,
   .comparison-row {
-    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    grid-template-columns: 1.8fr 1fr 1.1fr 1.3fr;
+    min-width: 580px;
     padding: 12px 14px;
     font-size: 12px;
   }

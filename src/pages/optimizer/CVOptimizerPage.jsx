@@ -369,7 +369,7 @@ const CVOptimizerPage = () => {
   ];
 
   return (
-    <div style={{ maxWidth: 1100 }}>
+    <div style={{ maxWidth: 1100, width: '100%' }}>
       {/* Header */}
       <div style={{ marginBottom: 'var(--space-5)' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
@@ -1090,7 +1090,7 @@ const CVOptimizerPage = () => {
                 type="button"
                 className="btn btn-primary btn-lg"
                 onClick={handleRunOptimization}
-                style={{ minHeight: 46, minWidth: 260 }}
+                style={{ minHeight: 46, minWidth: 'min(100%, 260px)', flex: '1 1 auto' }}
               >
                 <Sparkles size={18} /> Optimize My CV Now
               </button>
