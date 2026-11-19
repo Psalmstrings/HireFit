@@ -3,8 +3,9 @@ import { NavLink, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import {
   LayoutDashboard, FileText, Briefcase, Search, Zap, MessageSquare,
-  BookOpen, TrendingUp, Shield, PlusCircle, X, LogOut, User
+  BookOpen, TrendingUp, Shield, PlusCircle, X, LogOut, User, Download
 } from 'lucide-react';
+import { usePWA } from '../../hooks/usePWA';
 
 const navItems = [
   {
@@ -40,6 +41,7 @@ const navItems = [
 
 const Sidebar = ({ isOpen = false, onClose }) => {
   const { user, logout } = useAuth();
+  const { isInstallable, isInstalled, promptInstall } = usePWA();
 
   const handleLinkClick = () => {
     if (onClose) onClose();
@@ -131,9 +133,23 @@ const Sidebar = ({ isOpen = false, onClose }) => {
           )}
         </div>
 
-        {/* Mobile-only bottom logout */}
+        {/* Mobile-only bottom footer */}
         {user && (
           <div className="sidebar-mobile-footer hide-desktop">
+            {!isInstalled && isInstallable && (
+              <button
+                type="button"
+                className="btn btn-primary sidebar-logout-btn"
+                style={{ marginBottom: '0.625rem', width: '100%', justifyContent: 'center' }}
+                onClick={() => {
+                  if (onClose) onClose();
+                  promptInstall();
+                }}
+              >
+                <Download size={16} />
+                <span>Install HireFit App</span>
+              </button>
+            )}
             <button
               type="button"
               className="btn btn-secondary sidebar-logout-btn"

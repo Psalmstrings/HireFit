@@ -3,11 +3,13 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import {
   LayoutDashboard, FileText, Briefcase, LogOut, Settings,
-  Shield, Menu, X, User, ChevronDown, Sparkles
+  Shield, Menu, X, User, ChevronDown, Sparkles, Download
 } from 'lucide-react';
+import { usePWA } from '../../hooks/usePWA';
 
 const Navbar = ({ isMobileNavOpen = false, onToggleMobileNav }) => {
   const { user, logout } = useAuth();
+  const { isInstallable, isInstalled, promptInstall } = usePWA();
   const navigate = useNavigate();
   const location = useLocation();
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
@@ -149,6 +151,20 @@ const Navbar = ({ isMobileNavOpen = false, onToggleMobileNav }) => {
                 )}
               </div>
 
+              {/* Install App Button if Installable */}
+              {!isInstalled && isInstallable && (
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={promptInstall}
+                  title="Install HireFit App"
+                  aria-label="Install HireFit App"
+                >
+                  <Download size={14} />
+                  <span className="hide-mobile">Install App</span>
+                </button>
+              )}
+
               {/* Desktop Explicit Logout Button */}
               <button
                 className="btn btn-secondary btn-sm hide-mobile"
@@ -162,6 +178,18 @@ const Navbar = ({ isMobileNavOpen = false, onToggleMobileNav }) => {
           </>
         ) : (
           <div className="navbar-actions">
+            {!isInstalled && isInstallable && (
+              <button
+                type="button"
+                className="btn btn-ghost btn-sm"
+                onClick={promptInstall}
+                title="Install HireFit App"
+                aria-label="Install HireFit App"
+              >
+                <Download size={14} />
+                <span className="hide-mobile">Install App</span>
+              </button>
+            )}
             <Link to="/login" className="btn btn-ghost btn-sm">Sign in</Link>
             <Link to="/register" className="btn btn-primary btn-sm">Get Started</Link>
           </div>
