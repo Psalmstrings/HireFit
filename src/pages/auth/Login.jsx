@@ -12,6 +12,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [resending, setResending] = useState(false);
   const [unverifiedEmail, setUnverifiedEmail] = useState(null);
+  const [resendError, setResendError] = useState(null);
   const { login } = useAuth();
   const { success, error: toastError } = useToast();
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     setUnverifiedEmail(null);
+    setResendError(null);
     try {
       await login(email, password);
       success('Welcome back to HireFit!');
@@ -42,11 +44,14 @@ const Login = () => {
       return;
     }
     setResending(true);
+    setResendError(null);
     try {
       const { data } = await api.post('/auth/resend-verification', { email: targetEmail });
       success(data.message || 'Verification link sent! Check your inbox.');
     } catch (err) {
-      toastError(err.response?.data?.message || 'Failed to resend verification link.');
+      const msg = err.response?.data?.message || 'Failed to resend verification link.';
+      setResendError(msg);
+      toastError(msg);
     } finally {
       setResending(false);
     }
@@ -122,6 +127,11 @@ const Login = () => {
               >
                 <Mail size={14} /> {resending ? 'Sending...' : 'Resend Verification Email'}
               </button>
+              {resendError && (
+                <p style={{ margin: '8px 0 0 0', color: '#B91C1C', fontSize: '11px', lineHeight: 1.4, textAlign: 'center' }}>
+                  {resendError}
+                </p>
+              )}
             </div>
           )}
 
