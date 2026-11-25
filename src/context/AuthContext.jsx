@@ -39,9 +39,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, password) => {
     const { data } = await api.post('/auth/register', { name, email, password });
-    localStorage.setItem('hirefit_token', data.token);
-    localStorage.setItem('hirefit_user', JSON.stringify(data.user));
-    setUser(data.user);
+    // Do not set token or user: email verification is required before login
     return data;
   };
 
@@ -53,7 +51,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, loadUser }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, loadUser, setUser }}>
       {children}
     </AuthContext.Provider>
   );

@@ -26,8 +26,8 @@ const Register = () => {
 
     setLoading(true);
     try {
-      await register(name, email, password);
-      success('Account created! A verification link has been sent to your email.');
+      const data = await register(name, email, password);
+      success(data.message || 'Account created! Please check your email to verify your account.');
       setRegisteredEmail(email);
     } catch (err) {
       toastError(err.response?.data?.message || 'Registration failed. Please try again.');
@@ -73,17 +73,17 @@ const Register = () => {
                 Check Your Inbox
               </h1>
               <p style={{ fontSize: 'var(--text-sm)', color: 'var(--muted)', lineHeight: 1.6, marginBottom: 'var(--space-6)' }}>
-                We sent a verification link to <strong>{registeredEmail}</strong>. Please click the link in your email to activate your account.
+                We sent a confirmation link to <strong>{registeredEmail}</strong>. Please click the link in your email to verify your account. You must verify your email before you can log in.
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                <button
-                  type="button"
+                <Link
+                  to="/login"
                   className="btn btn-primary"
-                  onClick={() => navigate('/dashboard')}
+                  style={{ textDecoration: 'none', justifyContent: 'center' }}
                 >
-                  Continue to Dashboard <ArrowRight size={16} />
-                </button>
+                  Go to Sign In <ArrowRight size={16} />
+                </Link>
 
                 <button
                   type="button"

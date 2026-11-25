@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import Navbar from '../../components/layout/Navbar';
 import api from '../../services/api';
-import { LogIn, Mail } from 'lucide-react';
+import { LogIn, Mail, AlertTriangle } from 'lucide-react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -13,7 +13,7 @@ const Login = () => {
   const [resending, setResending] = useState(false);
   const [unverifiedEmail, setUnverifiedEmail] = useState(null);
   const { login } = useAuth();
-  const { success, error: toastError, info } = useToast();
+  const { success, error: toastError } = useToast();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -21,17 +21,14 @@ const Login = () => {
     setLoading(true);
     setUnverifiedEmail(null);
     try {
-      const data = await login(email, password);
+      await login(email, password);
       success('Welcome back to HireFit!');
-      if (data?.user?.isVerified === false) {
-        info('Notice: Your email address is not verified yet. Please check your inbox.');
-      }
       navigate('/dashboard');
     } catch (err) {
       const msg = err.response?.data?.message || 'Login failed. Please check your credentials.';
       toastError(msg);
       if (err.response?.data?.code === 'UNVERIFIED_EMAIL') {
-        setUnverifiedEmail(email);
+        setUnverifiedEmail(err.response?.data?.email || email);
       }
     } finally {
       setLoading(false);
@@ -108,13 +105,20 @@ const Login = () => {
           </form>
 
           {unverifiedEmail && (
-            <div style={{ marginTop: 'var(--space-4)', padding: 'var(--space-3)', background: 'var(--warning-light)', borderRadius: 'var(--radius)', fontSize: 'var(--text-xs)', textAlign: 'center' }}>
-              <p style={{ margin: '0 0 6px 0', color: '#92400E', fontWeight: 600 }}>Account unverified. Need a new activation link?</p>
+            <div style={{ marginTop: 'var(--space-4)', padding: 'var(--space-4)', background: '#FEF3C7', border: '1px solid #F59E0B', borderRadius: 'var(--radius)', fontSize: 'var(--text-sm)', textAlign: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, color: '#92400E', fontWeight: 700, marginBottom: 4 }}>
+                <AlertTriangle size={16} />
+                <span>Email Not Verified</span>
+              </div>
+              <p style={{ margin: '0 0 10px 0', color: '#78350F', fontSize: 'var(--text-xs)', lineHeight: 1.5 }}>
+                Your account for <strong>{unverifiedEmail}</strong> requires email verification before signing in.
+              </p>
               <button
                 type="button"
                 className="btn btn-secondary btn-sm"
                 onClick={handleResendVerification}
                 disabled={resending}
+                style={{ width: '100%', justifyContent: 'center' }}
               >
                 <Mail size={14} /> {resending ? 'Sending...' : 'Resend Verification Email'}
               </button>
